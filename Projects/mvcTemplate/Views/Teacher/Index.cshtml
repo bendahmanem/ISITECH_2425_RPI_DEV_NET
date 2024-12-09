@@ -1,0 +1,17 @@
+@model IEnumerable<Teacher>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Prenom</th>
+    </tr>
+    @foreach (var teacher in Model)
+    {
+        <tr>
+            <td>@teacher.Id</td>
+            <td>@teacher.Lastname</td>
+            <td>@teacher.Firstname</td>
+        </tr>
+    }
+</table>
