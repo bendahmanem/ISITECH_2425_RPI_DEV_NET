@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Student>
+
+<h1>Bonjour depuis /Student/Index</h1>
+<p>Voici les informations de l'étudiant:</p>
+<ul>
+    @foreach (var student in Model)
+    {
+        <li>@student.Firstname @student.Lastname</li>
+    }
+</ul>
