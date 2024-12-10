@@ -1,15 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
-
+using mvc.Data;
 using mvc.Models;
 
 public class TeacherController : Controller
 {
+    // champ prive pour stocker le dbcontext
+    private readonly ApplicationDbContext _context;
+
     // liste d'enseignants
     private static List<Teacher> _teachers = new List<Teacher>
     {
         new Teacher { Id = 1, Lastname = "Doe", Firstname = "John" },
         new Teacher { Id = 2, Lastname = "Smith", Firstname = "Jane" }
     };
+
+    // Constructeur
+    public TeacherController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
 
 
     public IActionResult Index()
@@ -38,7 +47,10 @@ public class TeacherController : Controller
             return View();
         }
         // Ajouter le teacher
-        _teachers.Add(teacher);
+        _context.Teachers.Add(teacher);
+
+        // Sauvegarder les changements
+        _context.SaveChanges();
         return RedirectToAction("Index");
     }
 
@@ -48,19 +60,7 @@ public class TeacherController : Controller
     // Accessible via /Teacher/ShowDetails/10
     public IActionResult ShowDetails(int id)
     {
-        Teacher teacher = new Teacher();
-        if (id == 10)
-        {
-            teacher.Firstname = "John";
-            teacher.Lastname = "Doe";
-            teacher.Id = 10;
-        }
-        else
-        {
-            teacher.Firstname = "Jane";
-            teacher.Lastname = "Smith";
-            teacher.Id = 20;
-        }
+        var teacher = _context.Teachers.Find(id);
         return View(teacher);
     }
 
