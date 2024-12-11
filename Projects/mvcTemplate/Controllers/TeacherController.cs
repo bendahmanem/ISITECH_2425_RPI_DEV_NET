@@ -10,8 +10,8 @@ public class TeacherController : Controller
     // liste d'enseignants
     private static List<Teacher> _teachers = new List<Teacher>
     {
-        new Teacher { Id = 1, Lastname = "Doe", Firstname = "John" },
-        new Teacher { Id = 2, Lastname = "Smith", Firstname = "Jane" }
+        new Teacher { Id = "1", Lastname = "Doe", Firstname = "John" },
+        new Teacher { Id = "2", Lastname = "Smith", Firstname = "Jane" }
     };
 
     // Constructeur
@@ -47,7 +47,7 @@ public class TeacherController : Controller
             return View();
         }
         // Ajouter le teacher
-        _context.Teachers.Add(teacher);
+        // _context.Teachers.Add(teacher);
 
         // Sauvegarder les changements
         _context.SaveChanges();
@@ -60,8 +60,9 @@ public class TeacherController : Controller
     // Accessible via /Teacher/ShowDetails/10
     public IActionResult ShowDetails(int id)
     {
-        var teacher = _context.Teachers.Find(id);
-        return View(teacher);
+        //var teacher = _context.Teachers.Find(id);
+        // return View(teacher);
+        return View();
     }
 
     // Afficher tous les Teachers
